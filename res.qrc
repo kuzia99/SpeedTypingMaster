@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/image">
+        <file>img/github.png</file>
+        <file>img/web.png</file>
+        <file>img/clock.png</file>
+    </qresource>
+</RCC>
