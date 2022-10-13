@@ -50,11 +50,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     qDebug() << myChar;
     QChar charInBrowser = (ui->textBrowser->toPlainText())[browserCursor.position()];//считали символ по текущему курсору
 
-    if(charInBrowser == myChar)
+   if(charInBrowser == myChar)
     {//если введен верный символ
         QTextCharFormat format;
         format.setFontWeight(QFont::DemiBold );
-        format.setForeground(QBrush(QColor("green")));
+        format.setForeground(QBrush(QColor("white")));
+        format.setFontWeight(22);
         browserCursor.movePosition(QTextCursor::Right);
         browserCursor.deletePreviousChar();
         browserCursor.insertText(myChar, format);
@@ -62,21 +63,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
     else if(myChar == '\x8')//key num "backspace"
     {//нажата клавиша "delete"
+
         if(!errorCharVector.isEmpty())
         {
 
-            if(userCharVector.contains(browserCursor.position()))
+           if(userCharVector.contains(browserCursor.position() - 1))
             {
-                browserCursor.movePosition(QTextCursor::Right);
                 browserCursor.deletePreviousChar();
                 userCharVector.pop_back();//вытащить последнюю запись из массива
             }
             else
             {
-                QChar prevChar = (ui->textBrowser->toPlainText())[browserCursor.position()];
-                browserCursor.movePosition(QTextCursor::Right);
+                QChar prevChar = (ui->textBrowser->toPlainText())[browserCursor.position() - 1];
                 browserCursor.deletePreviousChar();
                 QTextCharFormat format;
+                format.setFontWeight(22);
                 format.setFontWeight(QFont::DemiBold );
                 format.setForeground(QBrush(QColor("grey")));
                 browserCursor.insertText(prevChar, format);
@@ -86,6 +87,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 //удаляю предыдущий символ
                 //пишу запомненный символ серым цветом
                 //двигаю указатель на лево
+            }
+
+            if(errorCharVector.contains(browserCursor.position()))
+            {
+                errorCharVector.pop_back();
             }
         }
     }
@@ -97,6 +103,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             QTextCharFormat format;
             format.setFontWeight( QFont::DemiBold );
             format.setForeground( QBrush( QColor( "tomato" ) ) );
+            format.setFontWeight(22);
 
             //fcursor.movePosition(QTextCursor::Right);
             browserCursor.setCharFormat(QTextCharFormat());
@@ -114,13 +121,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             QTextCharFormat format;
             format.setFontWeight( QFont::DemiBold );
             format.setForeground( QBrush( QColor( "red" ) ) );
+            format.setFontWeight(22);
             browserCursor.movePosition(QTextCursor::Right);
 
             browserCursor.insertText((ui->textBrowser->toPlainText())[browserCursor.position() - 1], format);
             ui->textBrowser->setTextCursor(browserCursor);
             browserCursor.movePosition(QTextCursor::Left);
-
             browserCursor.deletePreviousChar();
+            browserCursor.movePosition(QTextCursor::Right);
 
         }
 
