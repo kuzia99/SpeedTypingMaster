@@ -37,12 +37,9 @@ class STMtextBrowser : public QTextBrowser
     Q_OBJECT
 
 public:
-    explicit STMtextBrowser(QWidget *parent);
-    STMtextBrowser();
+    explicit STMtextBrowser(QWidget *parent) : QTextBrowser(parent) {}
+    STMtextBrowser() {}
 private:
-
-protected:
-    //virtual void paintEvent(QPaintEvent *event);
 
 };
 

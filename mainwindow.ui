@@ -27,10 +27,10 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>180</y>
-      <width>821</width>
-      <height>171</height>
+      <x>50</x>
+      <y>150</y>
+      <width>811</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="font">
@@ -71,10 +71,10 @@ p, li { white-space: pre-wrap; }
      <number>2</number>
     </property>
     <property name="textInteractionFlags">
-     <set>Qt::TextSelectableByKeyboard</set>
+     <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -83,7 +83,7 @@ p, li { white-space: pre-wrap; }
       <height>35</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="BottomPanel">
      <item>
       <widget class="QLabel" name="label">
        <property name="font">
