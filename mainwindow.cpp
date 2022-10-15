@@ -1,4 +1,3 @@
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDesktopServices>
@@ -63,10 +62,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
     else if(myChar == '\x8')//key num "backspace"
     {//нажата клавиша "delete"
-
         if(!errorCharVector.isEmpty())
         {
-
            if(userCharVector.contains(browserCursor.position() - 1))
             {
                 browserCursor.deletePreviousChar();
@@ -79,6 +76,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 QTextCharFormat format;
                 format.setFontWeight(22);
                 format.setFontWeight(QFont::DemiBold );
+                format.setFontWeight(22);
                 format.setForeground(QBrush(QColor("grey")));
                 browserCursor.insertText(prevChar, format);
                 browserCursor.movePosition(QTextCursor::Left);
@@ -88,7 +86,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 //пишу запомненный символ серым цветом
                 //двигаю указатель на лево
             }
-
             if(errorCharVector.contains(browserCursor.position()))
             {
                 errorCharVector.pop_back();
@@ -131,9 +128,17 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             browserCursor.movePosition(QTextCursor::Right);
 
         }
-
         errorCharVector.push_back(browserCursor.position() - 1);
-
-
     }
+}
+
+void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
+{
+    QTextEdit::paintEvent(pEvent);// use paintEvent() of base class to do the main work
+    // draw cursor (if widget has focus)
+    //if (hasFocus()) {
+      const QRect qRect = cursorRect(textCursor());
+      QPainter qPainter(viewport());
+      qPainter.fillRect(qRect, textColor());
+    //}
 }

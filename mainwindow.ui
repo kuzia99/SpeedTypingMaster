@@ -71,7 +71,7 @@ p, li { white-space: pre-wrap; }
      <number>2</number>
     </property>
     <property name="textInteractionFlags">
-     <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -215,7 +215,7 @@ border: none;</string>
      <x>0</x>
      <y>0</y>
      <width>909</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
