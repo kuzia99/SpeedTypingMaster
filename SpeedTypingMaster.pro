@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    textbuilder.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    textbuilder.h
 
 FORMS += \
     mainwindow.ui

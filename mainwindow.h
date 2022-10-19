@@ -28,6 +28,8 @@ private slots:
 
     void keyPressEvent(QKeyEvent *e);
 
+    void on_comboBox_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 };

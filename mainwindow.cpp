@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QVector>
+#include "textbuilder.h"
 
 QVector<int> errorCharVector;
 QVector<int> userCharVector;
@@ -14,7 +15,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->textBrowser->setFocusPolicy(Qt::NoFocus);// без установки атрибута не работает захват клавиши "пробел"
+    ui->textBrowser->setFocusPolicy(Qt::NoFocus);// без установки атрибута не работает захват клавиши "пробел"    
+
+    QTextCharFormat format;
+    format.setFontWeight(22);
+    format.setFontWeight(QFont::DemiBold );
+    format.setFontWeight(22);
+    format.setForeground(QBrush(QColor("grey")));
+
+    ui->textBrowser->setCurrentCharFormat(format);
+    ui->textBrowser->setText(TextBuilder::generateText(QString("RUSSIAN")));
+
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
 }
 
@@ -45,6 +56,11 @@ void MainWindow::on_toolButtonTime_clicked()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    if(!event->text().size())
+    {
+        return;
+    }
+
     QChar myChar = event->text().at(0);//считаем нажатую клавишу
     qDebug() << myChar;
     QChar charInBrowser = (ui->textBrowser->toPlainText())[browserCursor.position()];//считали символ по текущему курсору
@@ -136,9 +152,25 @@ void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
 {
     QTextEdit::paintEvent(pEvent);// use paintEvent() of base class to do the main work
     // draw cursor (if widget has focus)
-    //if (hasFocus()) {
       const QRect qRect = cursorRect(textCursor());
       QPainter qPainter(viewport());
       qPainter.fillRect(qRect, textColor());
-    //}
 }
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
+{
+    QTextCharFormat format;
+    format.setFontWeight(22);
+    format.setFontWeight(QFont::DemiBold );
+    format.setFontWeight(22);
+    format.setForeground(QBrush(QColor("grey")));
+
+    errorCharVector.erase(errorCharVector.begin(), errorCharVector.end());
+    userCharVector.erase(userCharVector.begin(), userCharVector.end());
+
+    ui->textBrowser->setCurrentCharFormat(format);
+    ui->textBrowser->setText(TextBuilder::generateText(arg1));
+    browserCursor = ui->textBrowser->textCursor();// выставим курсор
+}
+
+
