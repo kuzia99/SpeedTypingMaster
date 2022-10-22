@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->textBrowser->setFocusPolicy(Qt::NoFocus);// без установки атрибута не работает захват клавиши "пробел"    
+    ui->comboBox->setFocusPolicy(Qt::NoFocus);
 
     QTextCharFormat format;
     format.setFontWeight(22);
@@ -27,6 +28,34 @@ MainWindow::MainWindow(QWidget *parent)
     ui->textBrowser->setText(TextBuilder::generateText(QString("RUSSIAN")));
 
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
+
+    struct s_filter: public QObject
+        {
+            using QObject::QObject;
+
+            bool eventFilter(QObject* o, QEvent* e)override
+            {
+                if(e->type()==QEvent::Type::KeyRelease)
+                {
+                    if(auto* event=dynamic_cast<QKeyEvent*>(e))
+                    {
+                        qDebug()<<"--------------";
+                        qDebug()<<"key='"<<event->key()<<"'";
+                        qDebug()<<"text='"<<event->text()<<"'";
+                    }
+                }
+
+                return QObject::eventFilter(o,e);
+            }
+        };
+
+        qApp->installEventFilter(new s_filter(qApp));
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -173,4 +202,35 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
 }
 
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    qApp->quit();
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    this->showMinimized();
+}
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_mousePoint = event->pos();
+        event->accept();
+    }
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+    const QPointF delta = event->globalPos() - m_mousePoint;
+    move(delta.toPoint());
+
+    event->accept();
+}
 

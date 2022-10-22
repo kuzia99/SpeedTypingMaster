@@ -2,13 +2,28 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>909</width>
-    <height>642</height>
+    <height>617</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>909</width>
+    <height>617</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>909</width>
+    <height>617</height>
+   </size>
   </property>
   <property name="focusPolicy">
    <enum>Qt::NoFocus</enum>
@@ -17,7 +32,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>STM</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -26,6 +41,12 @@
    <string notr="true">background-color: rgb(44, 44, 44);
 color: rgb(255, 255, 255);</string>
   </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="STMtextBrowser" name="textBrowser">
     <property name="enabled">
@@ -33,10 +54,10 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>120</x>
       <y>150</y>
-      <width>811</width>
-      <height>211</height>
+      <width>681</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -47,6 +68,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="mouseTracking">
      <bool>true</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -83,9 +107,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>560</y>
-      <width>446</width>
+      <x>0</x>
+      <y>580</y>
+      <width>346</width>
       <height>35</height>
      </rect>
     </property>
@@ -104,12 +128,21 @@ p, li { white-space: pre-wrap; }
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>2</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>31</width>
-           <height>31</height>
+           <width>21</width>
+           <height>21</height>
           </size>
          </property>
          <property name="font">
@@ -133,6 +166,12 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <family>Kanit</family>
@@ -140,7 +179,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::NoFocus</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(44, 44, 44);
@@ -156,19 +195,29 @@ border: none;</string>
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+      </layout>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>2</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_5">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="maximumSize">
           <size>
-           <width>31</width>
-           <height>31</height>
+           <width>21</width>
+           <height>21</height>
           </size>
          </property>
          <property name="font">
@@ -192,6 +241,12 @@ border: none;</string>
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <family>Kanit</family>
@@ -199,7 +254,7 @@ border: none;</string>
           </font>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::NoFocus</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(44, 44, 44);
@@ -219,9 +274,9 @@ border: none;</string>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>440</y>
-      <width>151</width>
+      <x>230</x>
+      <y>350</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -454,7 +509,7 @@ border: none;</string>
     <property name="font">
      <font>
       <family>Kanit</family>
-      <pointsize>12</pointsize>
+      <pointsize>15</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -465,8 +520,8 @@ border: none;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QComboBox {
-    border: 0px solid gray;
-    border-radius: 0px;
+    border: 0px;
+    border-radius: 10px;
     min-width: 6em;
 }
 
@@ -484,9 +539,9 @@ QComboBox QAbstractItemView {
 
 QComboBox::down-arrow {
 	image: url(:/img/arrow_down.png);
-	width :16;
-	height :16;
-	margin-top: 5px;
+	width :22;
+	height :22;
+	margin-top: 10,5px;
 	margin-right: 15px;
 }
 
@@ -515,18 +570,182 @@ QComboBox::item::hover
      </property>
     </item>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>349</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+    background-color: rgb(44, 44, 44);
+	border:0px;
+}
+
+QPushButton::hover
+ {
+  		background-color: #1E1E1E;
+    	border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/new/image/img/restart.png</normaloff>:/new/image/img/restart.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>921</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(30, 30, 30);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>111111</width>
+       <height>111111</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Kanit</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="res.qrc">:/new/image/img/LOGO CONCEPT 2.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>870</x>
+       <y>0</y>
+       <width>32</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+  	background-color: #1E1E1E;
+	border:0px;
+}
+
+QPushButton::hover
+ {
+    	background-color: rgb(44, 44, 44);
+    	border-radius: 10px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/img/Close_BTN.png</normaloff>:/img/Close_BTN.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>22</width>
+       <height>22</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>830</x>
+       <y>0</y>
+       <width>32</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+  	background-color: #1E1E1E;
+	border:0px;
+}
+
+QPushButton::hover
+ {
+    	background-color: rgb(44, 44, 44);
+    	border-radius: 10px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/new/image/img/Minimize_BTN.png</normaloff>:/new/image/img/Minimize_BTN.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>909</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

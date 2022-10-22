@@ -30,8 +30,17 @@ private slots:
 
     void on_comboBox_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    virtual void mousePressEvent(QMouseEvent* event);
+    virtual void resizeEvent(QResizeEvent* event);
+    virtual void mouseMoveEvent(QMouseEvent* event);
+
 private:
     Ui::MainWindow *ui;
+    QPointF m_mousePoint;
 };
 
 class STMtextBrowser : public QTextBrowser

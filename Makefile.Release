@@ -108,9 +108,13 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_res.cpp
 release/qrc_res.cpp: res.qrc \
 		../../../../Qt/6.3.1/mingw_64/bin/rcc.exe \
+		img/LOGO\ CONCEPT\ 2.png \
 		img/github.png \
 		img/clock.png \
+		img/restart.png \
+		img/Minimize_BTN.png \
 		img/web.png \
+		img/Close_BTN.png \
 		img/arrow_down.png
 	C:\Qt\6.3.1\mingw_64\bin\rcc.exe -name res res.qrc -o release\qrc_res.cpp
 
@@ -763,6 +767,7 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtGui/qpen.h \
 		ui_mainwindow.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtCore/QVariant \
+		../../../../Qt/6.3.1/mingw_64/include/QtGui/QIcon \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtCore/qcoreapplication.h \
@@ -797,6 +802,7 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qrubberband.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QFrame \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QHBoxLayout \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qboxlayout.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qlayout.h \
@@ -805,14 +811,9 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QLabel \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qlabel.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtGui/qpicture.h \
-		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QMenuBar \
-		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qmenubar.h \
-		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qmenu.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/QStatusBar \
-		../../../../Qt/6.3.1/mingw_64/include/QtWidgets/qstatusbar.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtGui/QDesktopServices \
 		../../../../Qt/6.3.1/mingw_64/include/QtGui/qdesktopservices.h \
 		../../../../Qt/6.3.1/mingw_64/include/QtGui/QKeyEvent \

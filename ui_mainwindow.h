@@ -10,14 +10,14 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 #include <mainwindow.h>
 
@@ -34,34 +34,44 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
     QPushButton *pushButtonSourceCode;
+    QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_5;
     QPushButton *pushButtonWebsite;
     QComboBox *comboBox;
-    QMenuBar *menubar;
-    QStatusBar *statusbar;
+    QPushButton *pushButton;
+    QFrame *frame;
+    QLabel *label_6;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(909, 642);
+        MainWindow->setWindowModality(Qt::NonModal);
+        MainWindow->resize(909, 617);
+        MainWindow->setMinimumSize(QSize(909, 617));
+        MainWindow->setMaximumSize(QSize(909, 617));
         MainWindow->setFocusPolicy(Qt::NoFocus);
         MainWindow->setContextMenuPolicy(Qt::NoContextMenu);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "color: rgb(255, 255, 255);"));
+        MainWindow->setAnimated(true);
+        MainWindow->setTabShape(QTabWidget::Rounded);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         textBrowser = new STMtextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setEnabled(true);
-        textBrowser->setGeometry(QRect(50, 150, 811, 211));
+        textBrowser->setGeometry(QRect(120, 150, 681, 171));
         QFont font;
         font.setFamilies({QString::fromUtf8("Kanit")});
         font.setPointSize(22);
         textBrowser->setFont(font);
         textBrowser->setMouseTracking(true);
+        textBrowser->setFocusPolicy(Qt::NoFocus);
         textBrowser->setFrameShape(QFrame::NoFrame);
         textBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         textBrowser->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -72,7 +82,7 @@ public:
         textBrowser->setTextInteractionFlags(Qt::NoTextInteraction);
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 560, 446, 35));
+        layoutWidget->setGeometry(QRect(0, 580, 346, 35));
         BottomPanel = new QHBoxLayout(layoutWidget);
         BottomPanel->setObjectName(QString::fromUtf8("BottomPanel"));
         BottomPanel->setContentsMargins(0, 0, 0, 0);
@@ -85,10 +95,16 @@ public:
         BottomPanel->addWidget(label);
 
         horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(2);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setMaximumSize(QSize(31, 31));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
+        label_2->setMaximumSize(QSize(21, 21));
         label_2->setFont(font1);
         label_2->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/github.png")));
         label_2->setScaledContents(true);
@@ -98,11 +114,16 @@ public:
         pushButtonSourceCode = new QPushButton(layoutWidget);
         pushButtonSourceCode->setObjectName(QString::fromUtf8("pushButtonSourceCode"));
         pushButtonSourceCode->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButtonSourceCode->sizePolicy().hasHeightForWidth());
+        pushButtonSourceCode->setSizePolicy(sizePolicy1);
         QFont font2;
         font2.setFamilies({QString::fromUtf8("Kanit")});
         font2.setPointSize(10);
         pushButtonSourceCode->setFont(font2);
-        pushButtonSourceCode->setFocusPolicy(Qt::ClickFocus);
+        pushButtonSourceCode->setFocusPolicy(Qt::NoFocus);
         pushButtonSourceCode->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "gridline-color: rgb(44, 44, 44);\n"
 "border-color: rgb(44, 44, 44);\n"
@@ -113,16 +134,20 @@ public:
 
         BottomPanel->addLayout(horizontalLayout);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(2);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+
+        BottomPanel->addLayout(horizontalLayout_3);
+
         horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(2);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
-        label_5->setMaximumSize(QSize(31, 31));
+        label_5->setMaximumSize(QSize(21, 21));
         label_5->setFont(font1);
         label_5->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/web.png")));
         label_5->setScaledContents(true);
@@ -132,8 +157,10 @@ public:
         pushButtonWebsite = new QPushButton(layoutWidget);
         pushButtonWebsite->setObjectName(QString::fromUtf8("pushButtonWebsite"));
         pushButtonWebsite->setEnabled(true);
+        sizePolicy1.setHeightForWidth(pushButtonWebsite->sizePolicy().hasHeightForWidth());
+        pushButtonWebsite->setSizePolicy(sizePolicy1);
         pushButtonWebsite->setFont(font2);
-        pushButtonWebsite->setFocusPolicy(Qt::ClickFocus);
+        pushButtonWebsite->setFocusPolicy(Qt::NoFocus);
         pushButtonWebsite->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "gridline-color: rgb(44, 44, 44);\n"
 "border-color: rgb(44, 44, 44);\n"
@@ -148,7 +175,7 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(660, 440, 151, 31));
+        comboBox->setGeometry(QRect(230, 350, 131, 31));
         QPalette palette;
         QBrush brush(QColor(255, 255, 255, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -193,13 +220,13 @@ public:
         comboBox->setPalette(palette);
         QFont font3;
         font3.setFamilies({QString::fromUtf8("Kanit")});
-        font3.setPointSize(12);
+        font3.setPointSize(15);
         comboBox->setFont(font3);
         comboBox->setFocusPolicy(Qt::NoFocus);
         comboBox->setContextMenuPolicy(Qt::ActionsContextMenu);
         comboBox->setStyleSheet(QString::fromUtf8("QComboBox {\n"
-"    border: 0px solid gray;\n"
-"    border-radius: 0px;\n"
+"    border: 0px;\n"
+"    border-radius: 10px;\n"
 "    min-width: 6em;\n"
 "}\n"
 "\n"
@@ -217,9 +244,9 @@ public:
 "\n"
 "QComboBox::down-arrow {\n"
 "	image: url(:/img/arrow_down.png);\n"
-"	width :16;\n"
-"	height :16;\n"
-"	margin-top: 5px;\n"
+"	width :22;\n"
+"	height :22;\n"
+"	margin-top: 10,5px;\n"
 "	margin-right: 15px;\n"
 "}\n"
 "\n"
@@ -234,14 +261,82 @@ public:
 "}\n"
 ""));
         comboBox->setFrame(true);
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(400, 349, 32, 32));
+        pushButton->setFocusPolicy(Qt::NoFocus);
+        pushButton->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"    background-color: rgb(44, 44, 44);\n"
+"	border:0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover\n"
+" {\n"
+"  		background-color: #1E1E1E;\n"
+"    	border-radius: 10px;\n"
+"}\n"
+""));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/new/image/img/restart.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon);
+        pushButton->setIconSize(QSize(24, 24));
+        frame = new QFrame(centralwidget);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setGeometry(QRect(0, 0, 921, 31));
+        frame->setStyleSheet(QString::fromUtf8("background-color: rgb(30, 30, 30);"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        label_6 = new QLabel(frame);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setGeometry(QRect(10, 0, 41, 41));
+        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy);
+        label_6->setMaximumSize(QSize(111111, 111111));
+        label_6->setFont(font1);
+        label_6->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/LOGO CONCEPT 2.png")));
+        label_6->setScaledContents(true);
+        pushButton_2 = new QPushButton(frame);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(870, 0, 32, 32));
+        pushButton_2->setFocusPolicy(Qt::NoFocus);
+        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"  	background-color: #1E1E1E;\n"
+"	border:0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover\n"
+" {\n"
+"    	background-color: rgb(44, 44, 44);\n"
+"    	border-radius: 10px;\n"
+"}\n"
+""));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/img/Close_BTN.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_2->setIcon(icon1);
+        pushButton_2->setIconSize(QSize(22, 22));
+        pushButton_3 = new QPushButton(frame);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(830, 0, 32, 32));
+        pushButton_3->setFocusPolicy(Qt::NoFocus);
+        pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"  	background-color: #1E1E1E;\n"
+"	border:0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover\n"
+" {\n"
+"    	background-color: rgb(44, 44, 44);\n"
+"    	border-radius: 10px;\n"
+"}\n"
+""));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/new/image/img/Minimize_BTN.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_3->setIcon(icon2);
+        pushButton_3->setIconSize(QSize(24, 24));
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 909, 21));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
 
@@ -250,7 +345,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "STM", nullptr));
         textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -264,6 +359,10 @@ public:
         comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "RUSSIAN", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "ENGLISH", nullptr));
 
+        pushButton->setText(QString());
+        label_6->setText(QString());
+        pushButton_2->setText(QString());
+        pushButton_3->setText(QString());
     } // retranslateUi
 
 };
