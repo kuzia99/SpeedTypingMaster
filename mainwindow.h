@@ -38,6 +38,8 @@ private slots:
     virtual void resizeEvent(QResizeEvent* event);
     virtual void mouseMoveEvent(QMouseEvent* event);
 
+    void timerEvent();
+
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;

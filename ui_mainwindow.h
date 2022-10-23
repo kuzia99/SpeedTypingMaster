@@ -44,6 +44,13 @@ public:
     QLabel *label_6;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
+    QComboBox *comboBox_2;
+    QFrame *frame_2;
+    QFrame *frame_3;
+    QWidget *layoutWidget1;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *labelTimerIcon;
+    QLabel *labelTimerCounter;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -55,6 +62,7 @@ public:
         MainWindow->setMaximumSize(QSize(909, 617));
         MainWindow->setFocusPolicy(Qt::NoFocus);
         MainWindow->setContextMenuPolicy(Qt::NoContextMenu);
+        MainWindow->setWindowOpacity(0.950000000000000);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "color: rgb(255, 255, 255);"));
@@ -82,7 +90,7 @@ public:
         textBrowser->setTextInteractionFlags(Qt::NoTextInteraction);
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 580, 346, 35));
+        layoutWidget->setGeometry(QRect(10, 580, 383, 35));
         BottomPanel = new QHBoxLayout(layoutWidget);
         BottomPanel->setObjectName(QString::fromUtf8("BottomPanel"));
         BottomPanel->setContentsMargins(0, 0, 0, 0);
@@ -90,6 +98,7 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Kanit")});
+        font1.setPointSize(11);
         label->setFont(font1);
 
         BottomPanel->addWidget(label);
@@ -105,7 +114,9 @@ public:
         sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy);
         label_2->setMaximumSize(QSize(21, 21));
-        label_2->setFont(font1);
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Kanit")});
+        label_2->setFont(font2);
         label_2->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/github.png")));
         label_2->setScaledContents(true);
 
@@ -119,10 +130,10 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(pushButtonSourceCode->sizePolicy().hasHeightForWidth());
         pushButtonSourceCode->setSizePolicy(sizePolicy1);
-        QFont font2;
-        font2.setFamilies({QString::fromUtf8("Kanit")});
-        font2.setPointSize(10);
-        pushButtonSourceCode->setFont(font2);
+        QFont font3;
+        font3.setFamilies({QString::fromUtf8("Kanit")});
+        font3.setPointSize(10);
+        pushButtonSourceCode->setFont(font3);
         pushButtonSourceCode->setFocusPolicy(Qt::NoFocus);
         pushButtonSourceCode->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "gridline-color: rgb(44, 44, 44);\n"
@@ -148,7 +159,7 @@ public:
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
         label_5->setMaximumSize(QSize(21, 21));
-        label_5->setFont(font1);
+        label_5->setFont(font2);
         label_5->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/web.png")));
         label_5->setScaledContents(true);
 
@@ -159,7 +170,7 @@ public:
         pushButtonWebsite->setEnabled(true);
         sizePolicy1.setHeightForWidth(pushButtonWebsite->sizePolicy().hasHeightForWidth());
         pushButtonWebsite->setSizePolicy(sizePolicy1);
-        pushButtonWebsite->setFont(font2);
+        pushButtonWebsite->setFont(font3);
         pushButtonWebsite->setFocusPolicy(Qt::NoFocus);
         pushButtonWebsite->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
 "gridline-color: rgb(44, 44, 44);\n"
@@ -175,7 +186,7 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(230, 350, 131, 31));
+        comboBox->setGeometry(QRect(120, 340, 131, 31));
         QPalette palette;
         QBrush brush(QColor(255, 255, 255, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -218,10 +229,10 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush);
 #endif
         comboBox->setPalette(palette);
-        QFont font3;
-        font3.setFamilies({QString::fromUtf8("Kanit")});
-        font3.setPointSize(15);
-        comboBox->setFont(font3);
+        QFont font4;
+        font4.setFamilies({QString::fromUtf8("Kanit")});
+        font4.setPointSize(15);
+        comboBox->setFont(font4);
         comboBox->setFocusPolicy(Qt::NoFocus);
         comboBox->setContextMenuPolicy(Qt::ActionsContextMenu);
         comboBox->setStyleSheet(QString::fromUtf8("QComboBox {\n"
@@ -263,7 +274,7 @@ public:
         comboBox->setFrame(true);
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(400, 349, 32, 32));
+        pushButton->setGeometry(QRect(390, 340, 32, 32));
         pushButton->setFocusPolicy(Qt::NoFocus);
         pushButton->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
@@ -293,7 +304,7 @@ public:
         sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
         label_6->setSizePolicy(sizePolicy);
         label_6->setMaximumSize(QSize(111111, 111111));
-        label_6->setFont(font1);
+        label_6->setFont(font2);
         label_6->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/LOGO CONCEPT 2.png")));
         label_6->setScaledContents(true);
         pushButton_2 = new QPushButton(frame);
@@ -336,6 +347,127 @@ public:
         icon2.addFile(QString::fromUtf8(":/new/image/img/Minimize_BTN.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_3->setIcon(icon2);
         pushButton_3->setIconSize(QSize(24, 24));
+        comboBox_2 = new QComboBox(centralwidget);
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setGeometry(QRect(280, 340, 96, 31));
+        comboBox_2->setMinimumSize(QSize(96, 0));
+        comboBox_2->setMaximumSize(QSize(76, 16777215));
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Active, QPalette::Shadow, brush2);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Active, QPalette::PlaceholderText, brush);
+#endif
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Shadow, brush3);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush);
+#endif
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Shadow, brush4);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush);
+#endif
+        comboBox_2->setPalette(palette1);
+        comboBox_2->setFont(font4);
+        comboBox_2->setFocusPolicy(Qt::NoFocus);
+        comboBox_2->setContextMenuPolicy(Qt::ActionsContextMenu);
+        comboBox_2->setStyleSheet(QString::fromUtf8("QComboBox {\n"
+"    border: 0px;\n"
+"    border-radius: 10px;\n"
+"    min-width: 6em;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down \n"
+"{\n"
+"    border: 0px;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"  background-color: #1E1E1E;\n"
+"  padding: 5px;\n"
+"  selection-background-color: lightgray;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"	image: url(:/img/arrow_down.png);\n"
+"	width :22;\n"
+"	height :22;\n"
+"	margin-top: 10,5px;\n"
+"	margin-right: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::hover\n"
+"{\n"
+"  background-color: #1E1E1E;\n"
+"}\n"
+"\n"
+"QComboBox::item::hover\n"
+"{\n"
+"  background-color: #1E1E1E;\n"
+"}\n"
+""));
+        comboBox_2->setFrame(true);
+        frame_2 = new QFrame(centralwidget);
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
+        frame_2->setGeometry(QRect(260, 340, 2, 31));
+        frame_2->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 116, 116);"));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        frame_3 = new QFrame(centralwidget);
+        frame_3->setObjectName(QString::fromUtf8("frame_3"));
+        frame_3->setGeometry(QRect(370, 340, 2, 31));
+        frame_3->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 116, 116);"));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(120, 110, 71, 43));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget1);
+        horizontalLayout_4->setSpacing(5);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        labelTimerIcon = new QLabel(layoutWidget1);
+        labelTimerIcon->setObjectName(QString::fromUtf8("labelTimerIcon"));
+        sizePolicy.setHeightForWidth(labelTimerIcon->sizePolicy().hasHeightForWidth());
+        labelTimerIcon->setSizePolicy(sizePolicy);
+        labelTimerIcon->setMaximumSize(QSize(28, 28));
+        labelTimerIcon->setFont(font2);
+        labelTimerIcon->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/stopwatch.png")));
+        labelTimerIcon->setScaledContents(true);
+
+        horizontalLayout_4->addWidget(labelTimerIcon);
+
+        labelTimerCounter = new QLabel(layoutWidget1);
+        labelTimerCounter->setObjectName(QString::fromUtf8("labelTimerCounter"));
+        QFont font5;
+        font5.setFamilies({QString::fromUtf8("Kanit")});
+        font5.setPointSize(20);
+        labelTimerCounter->setFont(font5);
+        labelTimerCounter->setStyleSheet(QString::fromUtf8("color: rgb(255, 229, 30);"));
+
+        horizontalLayout_4->addWidget(labelTimerCounter);
+
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -350,7 +482,7 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Kanit'; font-size:22pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#747474;\">some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text</span></p></body></html>", nullptr));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#747474;\">some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text</span></p></body></html>", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Created by Maxim Kuznetsov", nullptr));
         label_2->setText(QString());
         pushButtonSourceCode->setText(QCoreApplication::translate("MainWindow", "Source code", nullptr));
@@ -363,6 +495,13 @@ public:
         label_6->setText(QString());
         pushButton_2->setText(QString());
         pushButton_3->setText(QString());
+        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "15 s", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "30 s", nullptr));
+        comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "60 s", nullptr));
+        comboBox_2->setItemText(3, QCoreApplication::translate("MainWindow", "120 s", nullptr));
+
+        labelTimerIcon->setText(QString());
+        labelTimerCounter->setText(QCoreApplication::translate("MainWindow", "30", nullptr));
     } // retranslateUi
 
 };

@@ -114,6 +114,7 @@ release/qrc_res.cpp: res.qrc \
 		img/restart.png \
 		img/Minimize_BTN.png \
 		img/web.png \
+		img/stopwatch.png \
 		img/Close_BTN.png \
 		img/arrow_down.png
 	C:\Qt\6.3.1\mingw_64\bin\rcc.exe -name res res.qrc -o release\qrc_res.cpp

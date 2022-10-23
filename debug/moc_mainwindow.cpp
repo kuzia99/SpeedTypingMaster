@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[36];
-    char stringdata0[286];
+    const uint offsetsAndSize[38];
+    char stringdata0[297];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
@@ -47,7 +47,8 @@ QT_MOC_LITERAL(226, 12), // "QMouseEvent*"
 QT_MOC_LITERAL(239, 5), // "event"
 QT_MOC_LITERAL(245, 11), // "resizeEvent"
 QT_MOC_LITERAL(257, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(271, 14) // "mouseMoveEvent"
+QT_MOC_LITERAL(271, 14), // "mouseMoveEvent"
+QT_MOC_LITERAL(286, 10) // "timerEvent"
 
     },
     "MainWindow\0on_pushButtonSourceCode_clicked\0"
@@ -57,7 +58,7 @@ QT_MOC_LITERAL(271, 14) // "mouseMoveEvent"
     "arg1\0on_pushButton_2_clicked\0"
     "on_pushButton_3_clicked\0mousePressEvent\0"
     "QMouseEvent*\0event\0resizeEvent\0"
-    "QResizeEvent*\0mouseMoveEvent"
+    "QResizeEvent*\0mouseMoveEvent\0timerEvent"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +68,7 @@ static const uint qt_meta_data_MainWindow[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,16 +76,17 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   74,    2, 0x08,    1 /* Private */,
-       3,    0,   75,    2, 0x08,    2 /* Private */,
-       4,    0,   76,    2, 0x08,    3 /* Private */,
-       5,    1,   77,    2, 0x08,    4 /* Private */,
-       8,    1,   80,    2, 0x08,    6 /* Private */,
-      10,    0,   83,    2, 0x08,    8 /* Private */,
-      11,    0,   84,    2, 0x08,    9 /* Private */,
-      12,    1,   85,    2, 0x08,   10 /* Private */,
-      15,    1,   88,    2, 0x08,   12 /* Private */,
-      17,    1,   91,    2, 0x08,   14 /* Private */,
+       1,    0,   80,    2, 0x08,    1 /* Private */,
+       3,    0,   81,    2, 0x08,    2 /* Private */,
+       4,    0,   82,    2, 0x08,    3 /* Private */,
+       5,    1,   83,    2, 0x08,    4 /* Private */,
+       8,    1,   86,    2, 0x08,    6 /* Private */,
+      10,    0,   89,    2, 0x08,    8 /* Private */,
+      11,    0,   90,    2, 0x08,    9 /* Private */,
+      12,    1,   91,    2, 0x08,   10 /* Private */,
+      15,    1,   94,    2, 0x08,   12 /* Private */,
+      17,    1,   97,    2, 0x08,   14 /* Private */,
+      18,    0,  100,    2, 0x08,   16 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -97,6 +99,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void, 0x80000000 | 16,   14,
     QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -117,6 +120,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->mousePressEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
         case 8: _t->resizeEvent((*reinterpret_cast< std::add_pointer_t<QResizeEvent*>>(_a[1]))); break;
         case 9: _t->mouseMoveEvent((*reinterpret_cast< std::add_pointer_t<QMouseEvent*>>(_a[1]))); break;
+        case 10: _t->timerEvent(); break;
         default: ;
         }
     }
@@ -130,7 +134,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 , QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QResizeEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QKeyEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QResizeEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMouseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -157,13 +161,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 11)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }

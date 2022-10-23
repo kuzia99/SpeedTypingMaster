@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QVector>
+#include <QTimer>
 #include "textbuilder.h"
 
 QVector<int> errorCharVector;
@@ -30,32 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
 
     this->setWindowFlags(Qt::FramelessWindowHint);
-
-
-    struct s_filter: public QObject
-        {
-            using QObject::QObject;
-
-            bool eventFilter(QObject* o, QEvent* e)override
-            {
-                if(e->type()==QEvent::Type::KeyRelease)
-                {
-                    if(auto* event=dynamic_cast<QKeyEvent*>(e))
-                    {
-                        qDebug()<<"--------------";
-                        qDebug()<<"key='"<<event->key()<<"'";
-                        qDebug()<<"text='"<<event->text()<<"'";
-                    }
-                }
-
-                return QObject::eventFilter(o,e);
-            }
-        };
-
-        qApp->installEventFilter(new s_filter(qApp));
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -88,6 +63,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(!event->text().size())
     {
         return;
+    }
+    if(!browserCursor.position())
+    {
+        qDebug() << "start Timer";
+        QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
+        timer->start(1000);
     }
 
     QChar myChar = event->text().at(0);//считаем нажатую клавишу
@@ -233,4 +215,15 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
 
     event->accept();
 }
+
+void MainWindow::timerEvent()
+{
+    qDebug() << "timer Event";
+
+    QString curr = ui->labelTimerCounter->text();
+    int val = curr.toInt() - 1;
+    QString a = QString::number(val);
+    ui->labelTimerCounter->setText(a);
+}
+
 
