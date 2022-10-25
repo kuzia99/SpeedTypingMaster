@@ -6,9 +6,12 @@
 #include <QVector>
 #include <QTimer>
 #include "textbuilder.h"
+#include "resultwindow.h"
+#include "texthandler.h"
 
-QVector<int> errorCharVector;
-QVector<int> userCharVector;
+//QVector<int> errorCharVector;
+//QVector<int> userCharVector;
+
 QTextCursor browserCursor;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -31,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
 
     this->setWindowFlags(Qt::FramelessWindowHint);
+
+    ui->tabWidget->tabBar()->hide();
 }
 
 MainWindow::~MainWindow()
@@ -60,103 +65,18 @@ void MainWindow::on_toolButtonTime_clicked()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if(!event->text().size())
-    {
-        return;
-    }
+    auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
+    if(handler)
+        handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
+
     if(!browserCursor.position())
     {
         qDebug() << "start Timer";
-        QTimer *timer = new QTimer(this);
+        timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
         timer->start(1000);
     }
 
-    QChar myChar = event->text().at(0);//считаем нажатую клавишу
-    qDebug() << myChar;
-    QChar charInBrowser = (ui->textBrowser->toPlainText())[browserCursor.position()];//считали символ по текущему курсору
-
-   if(charInBrowser == myChar)
-    {//если введен верный символ
-        QTextCharFormat format;
-        format.setFontWeight(QFont::DemiBold );
-        format.setForeground(QBrush(QColor("white")));
-        format.setFontWeight(22);
-        browserCursor.movePosition(QTextCursor::Right);
-        browserCursor.deletePreviousChar();
-        browserCursor.insertText(myChar, format);
-        ui->textBrowser->setTextCursor(browserCursor);
-    }
-    else if(myChar == '\x8')//key num "backspace"
-    {//нажата клавиша "delete"
-        if(!errorCharVector.isEmpty())
-        {
-           if(userCharVector.contains(browserCursor.position() - 1))
-            {
-                browserCursor.deletePreviousChar();
-                userCharVector.pop_back();//вытащить последнюю запись из массива
-            }
-            else
-            {
-                QChar prevChar = (ui->textBrowser->toPlainText())[browserCursor.position() - 1];
-                browserCursor.deletePreviousChar();
-                QTextCharFormat format;
-                format.setFontWeight(22);
-                format.setFontWeight(QFont::DemiBold );
-                format.setFontWeight(22);
-                format.setForeground(QBrush(QColor("grey")));
-                browserCursor.insertText(prevChar, format);
-                browserCursor.movePosition(QTextCursor::Left);
-                ui->textBrowser->setTextCursor(browserCursor);
-                //запоминаю предыдущий символ
-                //удаляю предыдущий символ
-                //пишу запомненный символ серым цветом
-                //двигаю указатель на лево
-            }
-            if(errorCharVector.contains(browserCursor.position()))
-            {
-                errorCharVector.pop_back();
-            }
-        }
-    }
-   else
-    {//введен не верный символ
-        if(charInBrowser == ' ')
-        {//если текущий символ пробел
-            //добавляем напечатанный темно-красный символ
-            QTextCharFormat format;
-            format.setFontWeight( QFont::DemiBold );
-            format.setForeground( QBrush( QColor( "tomato" ) ) );
-            format.setFontWeight(22);
-
-            //fcursor.movePosition(QTextCursor::Right);
-            browserCursor.setCharFormat(QTextCharFormat());
-
-            browserCursor.insertText(myChar, format);
-            ui->textBrowser->setTextCursor(browserCursor);
-            //cursor.movePosition(QTextCursor::Left);
-
-            userCharVector.push_back(browserCursor.position() - 1);
-        }
-        else
-        {//не пробел
-            //меняем цвет символа на красный
-
-            QTextCharFormat format;
-            format.setFontWeight( QFont::DemiBold );
-            format.setForeground( QBrush( QColor( "red" ) ) );
-            format.setFontWeight(22);
-            browserCursor.movePosition(QTextCursor::Right);
-
-            browserCursor.insertText((ui->textBrowser->toPlainText())[browserCursor.position() - 1], format);
-            ui->textBrowser->setTextCursor(browserCursor);
-            browserCursor.movePosition(QTextCursor::Left);
-            browserCursor.deletePreviousChar();
-            browserCursor.movePosition(QTextCursor::Right);
-
-        }
-        errorCharVector.push_back(browserCursor.position() - 1);
-    }
 }
 
 void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
@@ -176,8 +96,8 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     format.setFontWeight(22);
     format.setForeground(QBrush(QColor("grey")));
 
-    errorCharVector.erase(errorCharVector.begin(), errorCharVector.end());
-    userCharVector.erase(userCharVector.begin(), userCharVector.end());
+    //errorCharVector.erase(errorCharVector.begin(), errorCharVector.end());
+    //userCharVector.erase(userCharVector.begin(), userCharVector.end());
 
     ui->textBrowser->setCurrentCharFormat(format);
     ui->textBrowser->setText(TextBuilder::generateText(arg1));
@@ -210,7 +130,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
 void MainWindow::mouseMoveEvent(QMouseEvent* event)
 {
-    const QPointF delta = event->globalPos() - m_mousePoint;
+    const QPointF delta = event->globalPosition() - m_mousePoint;
     move(delta.toPoint());
 
     event->accept();
@@ -224,6 +144,13 @@ void MainWindow::timerEvent()
     int val = curr.toInt() - 1;
     QString a = QString::number(val);
     ui->labelTimerCounter->setText(a);
+    if(!val)
+    {
+        qDebug() << "timer stop";
+        timer->stop();
+        //открываем новую форму
+        ui->tabWidget->setCurrentIndex(1);
+    }
 }
 
 

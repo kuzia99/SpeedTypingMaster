@@ -19,6 +19,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QTimer *timer = nullptr;
+
 private slots:
     void on_pushButtonSourceCode_clicked();
 
@@ -40,6 +42,8 @@ private slots:
 
     void timerEvent();
 
+    friend class AbstractCharHandler;
+
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;
@@ -56,5 +60,6 @@ public:
 private:
 
 };
+
 
 #endif // MAINWINDOW_H
