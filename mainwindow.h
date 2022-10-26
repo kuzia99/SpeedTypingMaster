@@ -47,6 +47,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;
+    void addTimer();
 };
 
 class STMtextBrowser : public QTextBrowser

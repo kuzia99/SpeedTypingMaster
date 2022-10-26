@@ -47,10 +47,17 @@ private:
     QTextBrowser* browser;
 };
 
+class NullKeyHandler : public AbstractCharHandler
+{
+public:
+    NullKeyHandler() {}
+    virtual void handle(QChar ch, QTextCursor &browserCursor) override {};
+};
+
 AbstractCharHandler* AbstractCharHandler::createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser)
 {
     if(!event->text().size())
-        return nullptr;
+        return new NullKeyHandler;
 
     QChar pressedChar = event->text().at(0);//считаем нажатую клавишу
     QChar charInBrowser = browser->toPlainText()[cursor.position()];

@@ -62,21 +62,24 @@ void MainWindow::on_toolButtonTime_clicked()
 
 }
 
-
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void MainWindow::addTimer()
 {
-    auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
-    if(handler)
-        handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
-
-    if(!browserCursor.position())
+    if(!timer)
     {
         qDebug() << "start Timer";
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
         timer->start(1000);
     }
+}
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
+
+    handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
+
+    addTimer();
 }
 
 void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
@@ -148,8 +151,9 @@ void MainWindow::timerEvent()
     {
         qDebug() << "timer stop";
         timer->stop();
-        //открываем новую форму
-        ui->tabWidget->setCurrentIndex(1);
+        delete timer;
+        timer = nullptr;
+        ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
     }
 }
 
