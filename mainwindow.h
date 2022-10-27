@@ -42,6 +42,8 @@ private slots:
 
     void timerEvent();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;
