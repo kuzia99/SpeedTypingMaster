@@ -14,7 +14,7 @@ TextBuilder::TextBuilder()
 
 QString TextBuilder::generateText(QString language)
 {
-     QString filePath = "C:/Users/Maxim/Documents/SpeedTypingMaster/" + language + ".json";
+     QString filePath = "D:/QtProject/SpeedTypingMaster-main/" + language + ".json";
      QString val;
      QFile file;
      file.setFileName(filePath);

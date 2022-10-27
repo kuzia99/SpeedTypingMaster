@@ -9,9 +9,6 @@
 #include "resultwindow.h"
 #include "texthandler.h"
 
-//QVector<int> errorCharVector;
-//QVector<int> userCharVector;
-
 QTextCursor browserCursor;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,13 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->textBrowser->setFocusPolicy(Qt::NoFocus);// без установки атрибута не работает захват клавиши "пробел"    
-    ui->comboBox->setFocusPolicy(Qt::NoFocus);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    ui->tabWidget->tabBar()->hide();
 
-    QTextCharFormat format;
-    format.setFontWeight(22);
-    format.setFontWeight(QFont::DemiBold );
-    format.setFontWeight(22);
+    QTextCharFormat format(ui->textBrowser->currentCharFormat());
     format.setForeground(QBrush(QColor("grey")));
 
     ui->textBrowser->setCurrentCharFormat(format);
@@ -33,9 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
 
-    this->setWindowFlags(Qt::FramelessWindowHint);
-
-    ui->tabWidget->tabBar()->hide();
+    stat->resetStat();
 }
 
 MainWindow::~MainWindow()
@@ -80,8 +72,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
     addTimer();
 
-    Data->newKeyEvent(handler->pressedKeyFlag);// вызываем метод для учета статистики
-
+    stat->keyPressed(handler->pressedKeyFlag);// вызываем метод для учета статистики
     delete handler;
 }
 
@@ -102,8 +93,7 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     format.setFontWeight(22);
     format.setForeground(QBrush(QColor("grey")));
 
-    //errorCharVector.erase(errorCharVector.begin(), errorCharVector.end());
-    //userCharVector.erase(userCharVector.begin(), userCharVector.end());
+    AbstractCharHandler::resetVectors();
 
     ui->textBrowser->setCurrentCharFormat(format);
     ui->textBrowser->setText(TextBuilder::generateText(arg1));
@@ -122,6 +112,7 @@ void MainWindow::on_pushButton_3_clicked()
 {
     this->showMinimized();
 }
+
 void MainWindow::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
@@ -156,6 +147,8 @@ void MainWindow::timerEvent()
         timer->stop();
         delete timer;
         timer = nullptr;
+
+        stat->print();//пишем результаты статистики на экран
         ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
     }
 }

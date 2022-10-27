@@ -74,6 +74,12 @@ AbstractCharHandler* AbstractCharHandler::createHandler(QKeyEvent *event, QTextC
         return new WrongCharHandler(browser->currentCharFormat());
 }
 
+void AbstractCharHandler::resetVectors()
+{
+    errorCharVector.erase(errorCharVector.begin(), errorCharVector.end());
+    userCharVector.erase(userCharVector.begin(), userCharVector.end());
+}
+
 void TrueCharHandler::handle(QChar ch, QTextCursor &browserCursor)
 {
     browserCursor.deleteChar();
@@ -140,3 +146,76 @@ void DeleteKeyHandler::handle(QChar ch, QTextCursor &browserCursor)
     pressedKeyFlag = KeyState::trueDeleteChar;
     (void)ch;
 }
+
+
+//****************************Statistic class method's********************//
+
+inputStatistic* stat = inputStatistic::getInstance();
+
+void inputStatistic::resetStat()
+{
+    inputTime = 0;
+    trueChar = 0;
+    wrongChar = 0;
+    extraChar = 0;
+    wrongPressed = 0;
+    extraPressed = 0;
+}
+
+void inputStatistic::print(Ui::MainWindow *ui)
+{
+    ui->label_7->setText(QString::number(trueChar/inputTime));//WPW
+
+}
+void inputStatistic::keyPressed(KeyState input)
+{
+    QMap<KeyState, void(inputStatistic::*)()> statMethods = {
+        {KeyState::trueChar, &inputStatistic::trueHandle},
+        {KeyState::wrongChar, &inputStatistic::wrongHandle},
+        {KeyState::extraChar, &inputStatistic::extraHandle},
+        {KeyState::NullChar,  &inputStatistic::nullHandle},
+        {KeyState::userDeleteChar, &inputStatistic::userDelHandle},
+        {KeyState::wrongDeleteChar, &inputStatistic::wrongDelHandle},
+        {KeyState::trueDeleteChar,  &inputStatistic::trueDelHandle},};
+
+    (this->*(statMethods[input]))();
+}
+
+void inputStatistic::trueHandle()
+{
+    trueChar++;
+}
+
+void inputStatistic::wrongHandle()
+{
+    wrongChar++;
+    wrongPressed++;
+}
+
+void inputStatistic::extraHandle()
+{
+    extraChar++;
+    extraPressed++;
+}
+
+void inputStatistic::nullHandle()
+{
+
+}
+
+void inputStatistic::userDelHandle()
+{
+    extraChar--;
+}
+
+void inputStatistic::wrongDelHandle()
+{
+    wrongChar--;
+}
+
+void inputStatistic::trueDelHandle()
+{
+    trueChar--;
+}
+
+

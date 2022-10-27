@@ -42,8 +42,6 @@ private slots:
 
     void timerEvent();
 
-    friend class AbstractCharHandler;
-
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;
