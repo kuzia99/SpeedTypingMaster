@@ -42,6 +42,7 @@ public:
         void keyPressed(KeyState input);
         void resetStat();
         void print(Ui::MainWindow *ui);
+        void setInputTime(int t);
 
         unsigned int inputTime = 0;//время ввода текста
         unsigned int trueChar = 0;//число правильных символов

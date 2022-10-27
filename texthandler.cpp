@@ -162,10 +162,15 @@ void inputStatistic::resetStat()
     extraPressed = 0;
 }
 
+void inputStatistic::setInputTime(int t)
+{
+    inputTime = t;
+}
+
 void inputStatistic::print(Ui::MainWindow *ui)
 {
-    ui->label_7->setText(QString::number(trueChar/inputTime));//WPW
-
+    int wordsPerMinutes = (trueChar * (60/inputTime)) / 5;
+    ui->label_7->setText(QString::number(wordsPerMinutes));
 }
 void inputStatistic::keyPressed(KeyState input)
 {

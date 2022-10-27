@@ -58,6 +58,7 @@ void MainWindow::addTimer()
 {
     if(!timer)
     {
+        stat->setInputTime(ui->labelTimerCounter->text().toInt());
         qDebug() << "start Timer";
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
@@ -148,7 +149,7 @@ void MainWindow::timerEvent()
         delete timer;
         timer = nullptr;
 
-        stat->print();//пишем результаты статистики на экран
+        stat->print(ui);//пишем результаты статистики на экран
         ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
     }
 }
