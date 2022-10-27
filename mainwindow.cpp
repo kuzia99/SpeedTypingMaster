@@ -149,9 +149,15 @@ void MainWindow::timerEvent()
         delete timer;
         timer = nullptr;
 
-        stat->print(ui);//пишем результаты статистики на экран
+        ui->label_7->setText(QString::number(stat->getWordsPerMinutes()));//пишем число символов
         ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
     }
 }
 
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+}
 

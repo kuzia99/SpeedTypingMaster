@@ -1,5 +1,4 @@
 #include "texthandler.h"
-#include "ui_mainwindow.h"
 
 QVector<int> errorCharVector;
 QVector<int> userCharVector;
@@ -167,10 +166,9 @@ void inputStatistic::setInputTime(int t)
     inputTime = t;
 }
 
-void inputStatistic::print(Ui::MainWindow *ui)
+int inputStatistic::getWordsPerMinutes()
 {
-    int wordsPerMinutes = (trueChar * (60/inputTime)) / 5;
-    ui->label_7->setText(QString::number(wordsPerMinutes));
+    return (trueChar * (60/inputTime)) / 5;
 }
 void inputStatistic::keyPressed(KeyState input)
 {

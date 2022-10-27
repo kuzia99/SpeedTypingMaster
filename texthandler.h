@@ -5,7 +5,6 @@
 #include <QKeyEvent>
 #include <QTextCursor>
 #include <QTextBrowser>
-#include "mainwindow.h"
 
 enum class KeyState {
     trueChar,
@@ -41,7 +40,7 @@ public:
 
         void keyPressed(KeyState input);
         void resetStat();
-        void print(Ui::MainWindow *ui);
+        int getWordsPerMinutes();
         void setInputTime(int t);
 
         unsigned int inputTime = 0;//время ввода текста
