@@ -42,6 +42,8 @@ public:
     DeleteKeyHandler(const QTextCharFormat form, QChar prev, QTextBrowser* brows) : format(form), prevChar(prev), browser(brows) {format.setForeground(QBrush(QColor("grey")));};
     virtual void handle(QChar ch, QTextCursor &browserCursor) override;
 private:
+    void deleteUserChar(QTextCursor &browserCursor);
+    void deleteNonUserChar(QTextCursor &browserCursor);
     QTextCharFormat format;
     QChar prevChar;
     QTextBrowser* browser;
@@ -76,6 +78,7 @@ void TrueCharHandler::handle(QChar ch, QTextCursor &browserCursor)
 {
     browserCursor.deleteChar();
     browserCursor.insertText(ch, format);//меняем цвет символа на серый
+    pressedKeyFlag = KeyState::trueChar;
 }
 
 void WrongCharHandler::handle(QChar ch, QTextCursor &browserCursor)
@@ -84,6 +87,7 @@ void WrongCharHandler::handle(QChar ch, QTextCursor &browserCursor)
     browserCursor.insertText(ch, format);//меняем цвет символа на серый
 
     errorCharVector.push_back(browserCursor.position() - 1);
+    pressedKeyFlag = KeyState::wrongChar;
 }
 
 void ExtraCharHadler::handle(QChar ch, QTextCursor &browserCursor)
@@ -92,29 +96,47 @@ void ExtraCharHadler::handle(QChar ch, QTextCursor &browserCursor)
 
     userCharVector.push_back(browserCursor.position() - 1);
     errorCharVector.push_back(browserCursor.position() - 1);
+    pressedKeyFlag = KeyState::extraChar;
     (void)ch;
+}
+
+void DeleteKeyHandler::deleteUserChar(QTextCursor &browserCursor)
+{
+    browserCursor.deletePreviousChar();
+    userCharVector.pop_back();//вытащить последнюю запись из массива
+
+    if(errorCharVector.contains(browserCursor.position()))
+        errorCharVector.pop_back();
+}
+
+void DeleteKeyHandler::deleteNonUserChar(QTextCursor &browserCursor)
+{
+    browserCursor.deletePreviousChar();
+    browserCursor.insertText(prevChar, format);
+    browserCursor.movePosition(QTextCursor::Left);
+    browser->setTextCursor(browserCursor);
 }
 
 void DeleteKeyHandler::handle(QChar ch, QTextCursor &browserCursor)
 {
-    if(errorCharVector.isEmpty()) return;
-
+    if(errorCharVector.isEmpty())
+    {
+        pressedKeyFlag = KeyState::NullChar;
+        return;
+    }
     if(userCharVector.contains(browserCursor.position() - 1))
     {
-        browserCursor.deletePreviousChar();
-        userCharVector.pop_back();//вытащить последнюю запись из массива
+        deleteUserChar(browserCursor);
+        pressedKeyFlag = KeyState::userDeleteChar;
+        return;
     }
-    else
-    {
-        browserCursor.deletePreviousChar();
-        browserCursor.insertText(prevChar, format);
-        browserCursor.movePosition(QTextCursor::Left);
-        browser->setTextCursor(browserCursor);
-    }
+    deleteNonUserChar(browserCursor);
     if(errorCharVector.contains(browserCursor.position()))
     {
+        pressedKeyFlag = KeyState::wrongDeleteChar;
         errorCharVector.pop_back();
+        return;
     }
-
+    pressedKeyFlag = KeyState::trueDeleteChar;
     (void)ch;
 }

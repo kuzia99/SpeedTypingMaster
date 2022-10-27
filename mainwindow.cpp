@@ -76,10 +76,13 @@ void MainWindow::addTimer()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
-
     handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
 
     addTimer();
+
+    Data->newKeyEvent(handler->pressedKeyFlag);// вызываем метод для учета статистики
+
+    delete handler;
 }
 
 void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
