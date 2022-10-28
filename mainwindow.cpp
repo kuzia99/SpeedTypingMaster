@@ -6,7 +6,6 @@
 #include <QVector>
 #include <QTimer>
 #include "textbuilder.h"
-#include "resultwindow.h"
 #include "texthandler.h"
 
 QTextCursor browserCursor;
@@ -19,15 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowFlags(Qt::FramelessWindowHint);
     ui->tabWidget->tabBar()->hide();
 
-    QTextCharFormat format(ui->textBrowser->currentCharFormat());
-    format.setForeground(QBrush(QColor("grey")));
+    //QTextCharFormat format(ui->textBrowser->currentCharFormat());
+    //format.setForeground(QBrush(QColor("grey")));
 
-    ui->textBrowser->setCurrentCharFormat(format);
-    ui->textBrowser->setText(TextBuilder::generateText(QString("RUSSIAN")));
+    //ui->textBrowser->setCurrentCharFormat(format);
+    //ui->textBrowser->setText(TextBuilder::generateText(QString("RUSSIAN")));
 
-    browserCursor = ui->textBrowser->textCursor();// выставим курсор
+    updateText();
 
-    stat->resetStat();
+    //browserCursor = ui->textBrowser->textCursor();// выставим курсор
+
+    //stat->resetStat();
 }
 
 MainWindow::~MainWindow()
@@ -88,17 +89,8 @@ void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
-    QTextCharFormat format;
-    format.setFontWeight(22);
-    format.setFontWeight(QFont::DemiBold );
-    format.setFontWeight(22);
-    format.setForeground(QBrush(QColor("grey")));
-
-    AbstractCharHandler::resetVectors();
-
-    ui->textBrowser->setCurrentCharFormat(format);
-    ui->textBrowser->setText(TextBuilder::generateText(arg1));
-    browserCursor = ui->textBrowser->textCursor();// выставим курсор
+    updateText();
+    (void) arg1;
 }
 
 
@@ -124,6 +116,7 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
+    (void)event;
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* event)
@@ -149,7 +142,13 @@ void MainWindow::timerEvent()
         delete timer;
         timer = nullptr;
 
-        ui->label_7->setText(QString::number(stat->getWordsPerMinutes()));//пишем число символов
+        ui->labelWordsPerMinutes->setText(QString::number(stat->getWordsPerMinutes()));
+        ui->labelAccuracy->setText(QString::number(stat->getAccuracyPercent()));
+        ui->labelCorrectChar->setText(QString::number(stat->getTrueCharCount()));
+        ui->labelWrongChar->setText(QString::number(stat->getWrongCharCount()));
+        ui->labeExtraChar->setText(QString::number(stat->getExtraCharCount()));
+
+
         ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
     }
 }
@@ -158,6 +157,20 @@ void MainWindow::timerEvent()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    updateText();//рестарт
+    ui->tabWidget->setCurrentIndex(0);//откроем страницу с текстом
+}
 
+void MainWindow::updateText()
+{
+    stat->resetStat();
+    AbstractCharHandler::resetVectors();
+
+    QTextCharFormat format(ui->textBrowser->currentCharFormat());
+    format.setForeground(QBrush(QColor("grey")));
+
+    ui->textBrowser->setCurrentCharFormat(format);
+    ui->textBrowser->setText(TextBuilder::generateText(ui->comboBox->currentText()));
+    browserCursor = ui->textBrowser->textCursor();// выставим курсор
 }
 

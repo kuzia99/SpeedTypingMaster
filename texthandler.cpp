@@ -52,7 +52,7 @@ class NullKeyHandler : public AbstractCharHandler
 {
 public:
     NullKeyHandler() {}
-    virtual void handle(QChar ch, QTextCursor &browserCursor) override {};
+    virtual void handle(QChar ch, QTextCursor &browserCursor) override {(void)ch; (void)browserCursor;};
 };
 
 AbstractCharHandler* AbstractCharHandler::createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser)
@@ -170,6 +170,30 @@ int inputStatistic::getWordsPerMinutes()
 {
     return (trueChar * (60/inputTime)) / 5;
 }
+
+int inputStatistic::getTrueCharCount()
+{
+    return trueChar;
+}
+
+int inputStatistic::getWrongCharCount()
+{
+    return wrongChar;
+}
+
+int inputStatistic::getExtraCharCount()
+{
+    return extraChar;
+}
+
+int inputStatistic::getAccuracyPercent()
+{
+    // точность = правильные символы / символов всего
+    // символов всего = правильные символы + ошибочные нажатия + дополнительные нажатия
+    int accuracy = ((float)trueChar / (trueChar + wrongPressed + extraPressed)) * 100;
+    return accuracy;
+}
+
 void inputStatistic::keyPressed(KeyState input)
 {
     QMap<KeyState, void(inputStatistic::*)()> statMethods = {

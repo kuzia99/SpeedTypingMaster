@@ -43,6 +43,7 @@ private slots:
     void timerEvent();
 
     void on_pushButton_4_clicked();
+    void updateText();
 
 private:
     Ui::MainWindow *ui;

@@ -40,7 +40,15 @@ public:
 
         void keyPressed(KeyState input);
         void resetStat();
+
         int getWordsPerMinutes();
+        int getTrueCharCount();
+        int getWrongCharCount();
+        int getExtraCharCount();
+        int getAccuracyPercent();
+
+
+
         void setInputTime(int t);
 
         unsigned int inputTime = 0;//время ввода текста
