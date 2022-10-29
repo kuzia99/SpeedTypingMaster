@@ -17,18 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
     ui->tabWidget->tabBar()->hide();
-
-    //QTextCharFormat format(ui->textBrowser->currentCharFormat());
-    //format.setForeground(QBrush(QColor("grey")));
-
-    //ui->textBrowser->setCurrentCharFormat(format);
-    //ui->textBrowser->setText(TextBuilder::generateText(QString("RUSSIAN")));
-
     updateText();
-
-    //browserCursor = ui->textBrowser->textCursor();// выставим курсор
-
-    //stat->resetStat();
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +46,7 @@ void MainWindow::on_toolButtonTime_clicked()
 
 void MainWindow::addTimer()
 {
-    if(!timer)
+    if(!timer && (browserCursor.position() == 1))
     {
         stat->setInputTime(ui->labelTimerCounter->text().toInt());
         qDebug() << "start Timer";
@@ -93,8 +82,6 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     (void) arg1;
 }
 
-
-
 void MainWindow::on_pushButton_2_clicked()
 {
     qApp->quit();
@@ -121,10 +108,13 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
 void MainWindow::mouseMoveEvent(QMouseEvent* event)
 {
-    const QPointF delta = event->globalPosition() - m_mousePoint;
-    move(delta.toPoint());
-
-    event->accept();
+    QMainWindow::mouseMoveEvent(event);
+    if(ui->TopPanel->geometry().contains(event->pos()))
+    {
+        const QPointF delta = event->globalPosition() - m_mousePoint;
+        move(delta.toPoint());
+        event->accept();
+    }
 }
 
 void MainWindow::timerEvent()
@@ -143,7 +133,7 @@ void MainWindow::timerEvent()
         timer = nullptr;
 
         ui->labelWordsPerMinutes->setText(QString::number(stat->getWordsPerMinutes()));
-        ui->labelAccuracy->setText(QString::number(stat->getAccuracyPercent()));
+        ui->labelAccuracy->setText(QString::number(stat->getAccuracyPercent()) + "%");
         ui->labelCorrectChar->setText(QString::number(stat->getTrueCharCount()));
         ui->labelWrongChar->setText(QString::number(stat->getWrongCharCount()));
         ui->labeExtraChar->setText(QString::number(stat->getExtraCharCount()));
@@ -166,11 +156,39 @@ void MainWindow::updateText()
     stat->resetStat();
     AbstractCharHandler::resetVectors();
 
+    QString counterTime = ui->comboBox_2->currentText();
+    counterTime.chop(2);
+    ui->labelTimerCounter->setText(counterTime);
+
     QTextCharFormat format(ui->textBrowser->currentCharFormat());
     format.setForeground(QBrush(QColor("grey")));
 
     ui->textBrowser->setCurrentCharFormat(format);
     ui->textBrowser->setText(TextBuilder::generateText(ui->comboBox->currentText()));
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
+
+    qDebug() << "timer stop";
+    if(timer)
+    {
+        timer->stop();
+        delete timer;
+        timer = nullptr;
+    }
+}
+
+
+void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1)
+{
+    QString counterTime = ui->comboBox_2->currentText();
+    counterTime.chop(2);
+    ui->labelTimerCounter->setText(counterTime);
+    updateText();
+    (void)arg1;
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    updateText();
 }
 

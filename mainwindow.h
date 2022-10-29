@@ -45,6 +45,10 @@ private slots:
     void on_pushButton_4_clicked();
     void updateText();
 
+    void on_comboBox_2_currentTextChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;

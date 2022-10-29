@@ -60,13 +60,21 @@ AbstractCharHandler* AbstractCharHandler::createHandler(QKeyEvent *event, QTextC
     if(!event->text().size())
         return new NullKeyHandler;
 
+    qDebug() << "event->text:" << event->text();
+    qDebug() << "event->key: " << event->key();
+
     QChar pressedChar = event->text().at(0);//считаем нажатую клавишу
     QChar charInBrowser = browser->toPlainText()[cursor.position()];
 
     if(pressedChar == charInBrowser)
         return new TrueCharHandler(browser->currentCharFormat());
     else if(pressedChar == '\x8')
-        return new DeleteKeyHandler(browser->currentCharFormat(), (browser->toPlainText())[cursor.position() - 1], browser);
+    {
+        if(cursor.position())
+            return new DeleteKeyHandler(browser->currentCharFormat(), (browser->toPlainText())[cursor.position() - 1], browser);
+        else
+            return new NullKeyHandler;
+    }
     else if(charInBrowser == ' ')
         return new ExtraCharHadler(browser->currentCharFormat(), pressedChar);
     else
@@ -168,6 +176,9 @@ void inputStatistic::setInputTime(int t)
 
 int inputStatistic::getWordsPerMinutes()
 {
+    if(!trueChar)
+        return 0;
+
     return (trueChar * (60/inputTime)) / 5;
 }
 
@@ -190,6 +201,9 @@ int inputStatistic::getAccuracyPercent()
 {
     // точность = правильные символы / символов всего
     // символов всего = правильные символы + ошибочные нажатия + дополнительные нажатия
+    if(!trueChar)
+        return 0;
+
     int accuracy = ((float)trueChar / (trueChar + wrongPressed + extraPressed)) * 100;
     return accuracy;
 }

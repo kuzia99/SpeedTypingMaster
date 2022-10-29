@@ -14,7 +14,7 @@ TextBuilder::TextBuilder()
 
 QString TextBuilder::generateText(QString language)
 {
-     QString filePath = "D:/QtProject/SpeedTypingMaster/" + language + ".json";
+     QString filePath = "C:/Users/Maxim/Documents/SpeedTypingMaster/" + language + ".json";
      QString val;
      QFile file;
      file.setFileName(filePath);
@@ -33,7 +33,7 @@ QString TextBuilder::generateText(QString language)
     QRandomGenerator gen;
     gen.seed(QDateTime::currentSecsSinceEpoch());
 
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 400; ++i)
     {
         rezultBuilding += (wordVector.at(gen.bounded(0, wordsCount)).toString() + " ");
     }
