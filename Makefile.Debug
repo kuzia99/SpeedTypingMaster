@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra
 INCPATH       = -I. -I../../../../Qt/6.3.1/mingw_64/include -I../../../../Qt/6.3.1/mingw_64/include/QtWidgets -I../../../../Qt/6.3.1/mingw_64/include/QtGui -I../../../../Qt/6.3.1/mingw_64/include/QtCore -Idebug -I. -I/include -I../../../../Qt/6.3.1/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\6.3.1\mingw_64\lib\libQt6Widgets.a C:\Qt\6.3.1\mingw_64\lib\libQt6Gui.a C:\Qt\6.3.1\mingw_64\lib\libQt6Core.a -lmingw32 C:\Qt\6.3.1\mingw_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        C:\Qt\6.3.1\mingw_64\lib\libQt6Widgets.a C:\Qt\6.3.1\mingw_64\lib\libQt6Gui.a C:\Qt\6.3.1\mingw_64\lib\libQt6Core.a debug\SpeedTypingMaster_resource_res.o -lmingw32 C:\Qt\6.3.1\mingw_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = C:\Qt\6.3.1\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\SpeedTypingMaster_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -84,8 +84,11 @@ DESTDIR_TARGET = debug\SpeedTypingMaster.exe
 first: all
 all: Makefile.Debug  debug/SpeedTypingMaster.exe
 
-debug/SpeedTypingMaster.exe: C:/Qt/6.3.1/mingw_64/lib/libQt6Widgets.a C:/Qt/6.3.1/mingw_64/lib/libQt6Gui.a C:/Qt/6.3.1/mingw_64/lib/libQt6Core.a C:/Qt/6.3.1/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h $(OBJECTS) 
+debug/SpeedTypingMaster.exe: C:/Qt/6.3.1/mingw_64/lib/libQt6Widgets.a C:/Qt/6.3.1/mingw_64/lib/libQt6Gui.a C:/Qt/6.3.1/mingw_64/lib/libQt6Core.a C:/Qt/6.3.1/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h $(OBJECTS) debug/SpeedTypingMaster_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS) $(LIBS)
+
+debug/SpeedTypingMaster_resource_res.o: SpeedTypingMaster_resource.rc
+	windres -i SpeedTypingMaster_resource.rc -o debug\SpeedTypingMaster_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug SpeedTypingMaster.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -97,6 +100,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\resultwindow.o debug\textbuilder.o debug\texthandler.o debug\qrc_res.o debug\moc_mainwindow.o debug\moc_resultwindow.o
+	-$(DEL_FILE) debug\SpeedTypingMaster_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -123,6 +127,7 @@ debug/qrc_res.cpp: res.qrc \
 		img/clock.png \
 		img/restart.png \
 		img/Minimize_BTN.png \
+		img/stm_icon(1).png \
 		img/web.png \
 		img/stopwatch.png \
 		img/Close_BTN.png \

@@ -7,6 +7,7 @@
         <file>img/LOGO CONCEPT 2.png</file>
         <file>img/Minimize_BTN.png</file>
         <file>img/stopwatch.png</file>
+        <file>img/stm_icon(1).png</file>
     </qresource>
     <qresource prefix="/">
         <file>img/arrow_down.png</file>

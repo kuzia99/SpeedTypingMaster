@@ -58,6 +58,13 @@ void MainWindow::addTimer()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    if((event->modifiers() & Qt::ControlModifier) && (event->key() == Qt::Key_R))
+    {
+        qDebug() << "control + R pressed";
+        updateText();
+        return;
+    }
+
     auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
     handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
 
@@ -166,6 +173,8 @@ void MainWindow::updateText()
     ui->textBrowser->setCurrentCharFormat(format);
     ui->textBrowser->setText(TextBuilder::generateText(ui->comboBox->currentText()));
     browserCursor = ui->textBrowser->textCursor();// выставим курсор
+
+    ui->tabWidget->setCurrentIndex(0);//открываем форму ввода текста
 
     qDebug() << "timer stop";
     if(timer)

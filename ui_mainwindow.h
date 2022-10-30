@@ -59,7 +59,6 @@ public:
     QComboBox *comboBox_2;
     QLabel *label_3;
     QWidget *tab_2;
-    QPushButton *pushButton_4;
     QWidget *layoutWidget3;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
@@ -76,6 +75,7 @@ public:
     QLabel *label_15;
     QLabel *labeExtraChar;
     QLabel *label_11;
+    QPushButton *pushButton_4;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -197,12 +197,12 @@ public:
         TopPanel->setFrameShadow(QFrame::Raised);
         label_6 = new QLabel(TopPanel);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(10, 0, 41, 41));
+        label_6->setGeometry(QRect(5, 5, 22, 22));
         sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
         label_6->setSizePolicy(sizePolicy);
         label_6->setMaximumSize(QSize(111111, 111111));
         label_6->setFont(font1);
-        label_6->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/LOGO CONCEPT 2.png")));
+        label_6->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/stm_icon(1).png")));
         label_6->setScaledContents(true);
         pushButton_2 = new QPushButton(TopPanel);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
@@ -527,30 +527,15 @@ public:
 
         label_3 = new QLabel(tab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(360, 480, 121, 16));
+        label_3->setGeometry(QRect(400, 440, 121, 16));
+        label_3->setFont(font);
+        label_3->setStyleSheet(QString::fromUtf8("color: rgb(116, 116, 116);"));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        pushButton_4 = new QPushButton(tab_2);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(440, 270, 32, 32));
-        pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton\n"
-"{\n"
-"    background-color: rgb(44, 44, 44);\n"
-"	border:0px;\n"
-"}\n"
-"\n"
-"QPushButton::hover\n"
-" {\n"
-"  		background-color: #1E1E1E;\n"
-"    	border-radius: 10px;\n"
-"}\n"
-""));
-        pushButton_4->setIcon(icon2);
-        pushButton_4->setIconSize(QSize(24, 24));
         layoutWidget3 = new QWidget(tab_2);
         layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(340, 190, 231, 71));
+        layoutWidget3->setGeometry(QRect(350, 170, 231, 61));
         horizontalLayout_6 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_6->setSpacing(20);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
@@ -560,19 +545,17 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         labelWordsPerMinutes = new QLabel(layoutWidget3);
         labelWordsPerMinutes->setObjectName(QString::fromUtf8("labelWordsPerMinutes"));
-        QFont font6;
-        font6.setFamilies({QString::fromUtf8("Kanit")});
-        font6.setPointSize(18);
-        labelWordsPerMinutes->setFont(font6);
+        labelWordsPerMinutes->setFont(font4);
+        labelWordsPerMinutes->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(labelWordsPerMinutes);
 
         label_4 = new QLabel(layoutWidget3);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        QFont font7;
-        font7.setFamilies({QString::fromUtf8("Kanit")});
-        font7.setPointSize(14);
-        label_4->setFont(font7);
+        QFont font6;
+        font6.setFamilies({QString::fromUtf8("Kanit")});
+        font6.setPointSize(14);
+        label_4->setFont(font6);
 
         verticalLayout->addWidget(label_4);
 
@@ -584,13 +567,17 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         labelAccuracy = new QLabel(layoutWidget3);
         labelAccuracy->setObjectName(QString::fromUtf8("labelAccuracy"));
-        labelAccuracy->setFont(font6);
+        QFont font7;
+        font7.setFamilies({QString::fromUtf8("Kanit")});
+        font7.setPointSize(18);
+        labelAccuracy->setFont(font7);
+        labelAccuracy->setAlignment(Qt::AlignCenter);
 
         verticalLayout_2->addWidget(labelAccuracy);
 
         label_9 = new QLabel(layoutWidget3);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setFont(font7);
+        label_9->setFont(font6);
 
         verticalLayout_2->addWidget(label_9);
 
@@ -606,33 +593,38 @@ public:
         horizontalLayout_5->setContentsMargins(-1, -1, 0, -1);
         labelCorrectChar = new QLabel(layoutWidget3);
         labelCorrectChar->setObjectName(QString::fromUtf8("labelCorrectChar"));
-        labelCorrectChar->setFont(font6);
+        labelCorrectChar->setFont(font7);
+        labelCorrectChar->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_5->addWidget(labelCorrectChar);
 
         label_12 = new QLabel(layoutWidget3);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setFont(font6);
+        label_12->setFont(font7);
+        label_12->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_5->addWidget(label_12);
 
         labelWrongChar = new QLabel(layoutWidget3);
         labelWrongChar->setObjectName(QString::fromUtf8("labelWrongChar"));
-        labelWrongChar->setFont(font6);
+        labelWrongChar->setFont(font7);
         labelWrongChar->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
+        labelWrongChar->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_5->addWidget(labelWrongChar);
 
         label_15 = new QLabel(layoutWidget3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setFont(font6);
+        label_15->setFont(font7);
+        label_15->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_5->addWidget(label_15);
 
         labeExtraChar = new QLabel(layoutWidget3);
         labeExtraChar->setObjectName(QString::fromUtf8("labeExtraChar"));
-        labeExtraChar->setFont(font6);
+        labeExtraChar->setFont(font7);
         labeExtraChar->setStyleSheet(QString::fromUtf8("color: rgb(255, 120, 52);"));
+        labeExtraChar->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_5->addWidget(labeExtraChar);
 
@@ -642,18 +634,36 @@ public:
         label_11 = new QLabel(layoutWidget3);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         label_11->setFont(font);
+        label_11->setAlignment(Qt::AlignCenter);
 
         verticalLayout_3->addWidget(label_11);
 
 
         horizontalLayout_6->addLayout(verticalLayout_3);
 
+        pushButton_4 = new QPushButton(tab_2);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        pushButton_4->setGeometry(QRect(440, 250, 32, 32));
+        pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"    background-color: rgb(44, 44, 44);\n"
+"	border:0px;\n"
+"}\n"
+"\n"
+"QPushButton::hover\n"
+" {\n"
+"  		background-color: #1E1E1E;\n"
+"    	border-radius: 10px;\n"
+"}\n"
+""));
+        pushButton_4->setIcon(icon2);
+        pushButton_4->setIconSize(QSize(24, 24));
         tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -686,10 +696,9 @@ public:
         comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "60 s", nullptr));
         comboBox_2->setItemText(3, QCoreApplication::translate("MainWindow", "120 s", nullptr));
 
-        label_3->setText(QCoreApplication::translate("MainWindow", "tab + enter - restart test", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "CTRL + R - Restart", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
-        pushButton_4->setText(QString());
-        labelWordsPerMinutes->setText(QCoreApplication::translate("MainWindow", " 67", nullptr));
+        labelWordsPerMinutes->setText(QCoreApplication::translate("MainWindow", "67", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "WPM", nullptr));
         labelAccuracy->setText(QCoreApplication::translate("MainWindow", "96%", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", " ACC", nullptr));
@@ -699,6 +708,7 @@ public:
         label_15->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         labeExtraChar->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "CHARACTERS", nullptr));
+        pushButton_4->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
     } // retranslateUi
 
