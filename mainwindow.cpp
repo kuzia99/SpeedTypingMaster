@@ -27,14 +27,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonSourceCode_clicked()
 {
-    QString link = "http://www.google.com";
+    QString link = "https://github.com/kuzia99/SpeedTypingMaster";
     QDesktopServices::openUrl(QUrl(link));
 }
 
 
 void MainWindow::on_pushButtonWebsite_clicked()
 {
-    QString link = "http://www.google.com";
+    QString link = "https://kuzia99.github.io/STM/";
     QDesktopServices::openUrl(QUrl(link));
 }
 

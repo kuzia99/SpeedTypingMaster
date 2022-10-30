@@ -32,13 +32,13 @@ public:
     QWidget *layoutWidget;
     QHBoxLayout *BottomPanel;
     QLabel *label;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_5;
+    QPushButton *pushButtonWebsite;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
     QPushButton *pushButtonSourceCode;
     QHBoxLayout *horizontalLayout_3;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label_5;
-    QPushButton *pushButtonWebsite;
     QFrame *TopPanel;
     QLabel *label_6;
     QPushButton *pushButton_2;
@@ -110,19 +110,56 @@ public:
 
         BottomPanel->addWidget(label);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(2);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label_5 = new QLabel(layoutWidget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
+        label_5->setSizePolicy(sizePolicy);
+        label_5->setMaximumSize(QSize(21, 21));
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Kanit")});
+        label_5->setFont(font1);
+        label_5->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/web.png")));
+        label_5->setScaledContents(true);
+
+        horizontalLayout_2->addWidget(label_5);
+
+        pushButtonWebsite = new QPushButton(layoutWidget);
+        pushButtonWebsite->setObjectName(QString::fromUtf8("pushButtonWebsite"));
+        pushButtonWebsite->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButtonWebsite->sizePolicy().hasHeightForWidth());
+        pushButtonWebsite->setSizePolicy(sizePolicy1);
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Kanit")});
+        font2.setPointSize(10);
+        pushButtonWebsite->setFont(font2);
+        pushButtonWebsite->setFocusPolicy(Qt::NoFocus);
+        pushButtonWebsite->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
+"gridline-color: rgb(44, 44, 44);\n"
+"border-color: rgb(44, 44, 44);\n"
+"border: none;"));
+
+        horizontalLayout_2->addWidget(pushButtonWebsite);
+
+
+        BottomPanel->addLayout(horizontalLayout_2);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(2);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy);
         label_2->setMaximumSize(QSize(21, 21));
-        QFont font1;
-        font1.setFamilies({QString::fromUtf8("Kanit")});
         label_2->setFont(font1);
         label_2->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/github.png")));
         label_2->setScaledContents(true);
@@ -132,14 +169,8 @@ public:
         pushButtonSourceCode = new QPushButton(layoutWidget);
         pushButtonSourceCode->setObjectName(QString::fromUtf8("pushButtonSourceCode"));
         pushButtonSourceCode->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Minimum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(pushButtonSourceCode->sizePolicy().hasHeightForWidth());
         pushButtonSourceCode->setSizePolicy(sizePolicy1);
-        QFont font2;
-        font2.setFamilies({QString::fromUtf8("Kanit")});
-        font2.setPointSize(10);
         pushButtonSourceCode->setFont(font2);
         pushButtonSourceCode->setFocusPolicy(Qt::NoFocus);
         pushButtonSourceCode->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
@@ -157,37 +188,6 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
 
         BottomPanel->addLayout(horizontalLayout_3);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(2);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_5 = new QLabel(layoutWidget);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
-        label_5->setSizePolicy(sizePolicy);
-        label_5->setMaximumSize(QSize(21, 21));
-        label_5->setFont(font1);
-        label_5->setPixmap(QPixmap(QString::fromUtf8(":/new/image/img/web.png")));
-        label_5->setScaledContents(true);
-
-        horizontalLayout_2->addWidget(label_5);
-
-        pushButtonWebsite = new QPushButton(layoutWidget);
-        pushButtonWebsite->setObjectName(QString::fromUtf8("pushButtonWebsite"));
-        pushButtonWebsite->setEnabled(true);
-        sizePolicy1.setHeightForWidth(pushButtonWebsite->sizePolicy().hasHeightForWidth());
-        pushButtonWebsite->setSizePolicy(sizePolicy1);
-        pushButtonWebsite->setFont(font2);
-        pushButtonWebsite->setFocusPolicy(Qt::NoFocus);
-        pushButtonWebsite->setStyleSheet(QString::fromUtf8("background-color: rgb(44, 44, 44);\n"
-"gridline-color: rgb(44, 44, 44);\n"
-"border-color: rgb(44, 44, 44);\n"
-"border: none;"));
-
-        horizontalLayout_2->addWidget(pushButtonWebsite);
-
-
-        BottomPanel->addLayout(horizontalLayout_2);
 
         TopPanel = new QFrame(centralwidget);
         TopPanel->setObjectName(QString::fromUtf8("TopPanel"));
@@ -535,7 +535,7 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         layoutWidget3 = new QWidget(tab_2);
         layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(350, 170, 231, 61));
+        layoutWidget3->setGeometry(QRect(350, 170, 231, 74));
         horizontalLayout_6 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_6->setSpacing(20);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
@@ -673,10 +673,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "STM", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Created by Maxim Kuznetsov", nullptr));
-        label_2->setText(QString());
-        pushButtonSourceCode->setText(QCoreApplication::translate("MainWindow", "Source code", nullptr));
         label_5->setText(QString());
         pushButtonWebsite->setText(QCoreApplication::translate("MainWindow", "Website", nullptr));
+        label_2->setText(QString());
+        pushButtonSourceCode->setText(QCoreApplication::translate("MainWindow", "Source code", nullptr));
         label_6->setText(QString());
         pushButton_2->setText(QString());
         pushButton_3->setText(QString());

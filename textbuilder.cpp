@@ -5,6 +5,7 @@
 #include <QJsonArray>
 #include <QRandomGenerator>
 #include <QDateTime>
+#include <QDir>
 
 
 TextBuilder::TextBuilder()
@@ -14,7 +15,8 @@ TextBuilder::TextBuilder()
 
 QString TextBuilder::generateText(QString language)
 {
-     QString filePath = "C:/Users/Maxim/Documents/SpeedTypingMaster/" + language + ".json";
+     QString filePath = QDir::currentPath() + "/" +  language + ".json";
+     qDebug() << "path: " << QDir::currentPath();
      QString val;
      QFile file;
      file.setFileName(filePath);
