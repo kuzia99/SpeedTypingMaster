@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QTextCursor>
 #include <QTextBrowser>
+#include <QSharedPointer>
 
 enum class KeyState {
     trueChar,
@@ -21,7 +22,7 @@ public:
     virtual ~AbstractCharHandler() {}
 
     virtual void handle(QChar ch, QTextCursor &browserCursor) = 0;
-    static AbstractCharHandler* createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser);
+    static QSharedPointer<AbstractCharHandler> createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser);
     static void resetVectors();
 
     KeyState pressedKeyFlag = KeyState::NullChar;

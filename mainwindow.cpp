@@ -5,8 +5,10 @@
 #include <QPainter>
 #include <QVector>
 #include <QTimer>
+#include <QSharedPointer>
 #include "textbuilder.h"
 #include "texthandler.h"
+
 
 QTextCursor browserCursor;
 
@@ -67,11 +69,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
     auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
     handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
-
     addTimer();
-
     stat->keyPressed(handler->pressedKeyFlag);// вызываем метод для учета статистики
-    delete handler;
 }
 
 void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
@@ -126,7 +125,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
 
 void MainWindow::timerEvent()
 {
-    qDebug() << "timer Event";
+    //qDebug() << "timer Event";
 
     QString curr = ui->labelTimerCounter->text();
     int val = curr.toInt() - 1;
@@ -134,7 +133,7 @@ void MainWindow::timerEvent()
     ui->labelTimerCounter->setText(a);
     if(!val)
     {
-        qDebug() << "timer stop";
+        //qDebug() << "timer stop";
         timer->stop();
         delete timer;
         timer = nullptr;
@@ -176,7 +175,7 @@ void MainWindow::updateText()
 
     ui->tabWidget->setCurrentIndex(0);//открываем форму ввода текста
 
-    qDebug() << "timer stop";
+    //qDebug() << "timer stop";
     if(timer)
     {
         timer->stop();

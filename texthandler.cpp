@@ -6,7 +6,7 @@ QVector<int> userCharVector;
 class TrueCharHandler : public AbstractCharHandler
 {
 public:
-    TrueCharHandler() {}
+    TrueCharHandler() = default;
     TrueCharHandler(const QTextCharFormat form) : format(form) {format.setForeground(QBrush(QColor("white")));};
     virtual void handle(QChar ch, QTextCursor &browserCursor) override;
 private:
@@ -16,7 +16,7 @@ private:
 class WrongCharHandler : public AbstractCharHandler
 {
 public:
-    WrongCharHandler() {}
+    WrongCharHandler() = default;
     WrongCharHandler(const QTextCharFormat form ) : format(form) {format.setForeground(QBrush(QColor("red")));};
     virtual void handle(QChar ch, QTextCursor &browserCursor) override;
 private:
@@ -26,7 +26,7 @@ private:
 class ExtraCharHadler : public AbstractCharHandler
 {
 public:
-    ExtraCharHadler() {}
+    ExtraCharHadler() = default;
     ExtraCharHadler(const QTextCharFormat form, QChar userChar) : format(form), userNewChar(userChar) {format.setForeground(QBrush(QColor("tomato")));};
     virtual void handle(QChar ch, QTextCursor &browserCursor) override;
 private:
@@ -37,7 +37,7 @@ private:
 class DeleteKeyHandler : public AbstractCharHandler
 {
 public:
-    DeleteKeyHandler() {}
+    DeleteKeyHandler() = default;
     DeleteKeyHandler(const QTextCharFormat form, QChar prev, QTextBrowser* brows) : format(form), prevChar(prev), browser(brows) {format.setForeground(QBrush(QColor("grey")));};
     virtual void handle(QChar ch, QTextCursor &browserCursor) override;
 private:
@@ -51,34 +51,34 @@ private:
 class NullKeyHandler : public AbstractCharHandler
 {
 public:
-    NullKeyHandler() {}
+    NullKeyHandler() = default;
     virtual void handle(QChar ch, QTextCursor &browserCursor) override {(void)ch; (void)browserCursor;};
 };
 
-AbstractCharHandler* AbstractCharHandler::createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser)
+QSharedPointer<AbstractCharHandler> AbstractCharHandler::createHandler(QKeyEvent *event, QTextCursor &cursor, QTextBrowser* browser)
 {
     if(!event->text().size())
-        return new NullKeyHandler;
+        return QSharedPointer<NullKeyHandler>::create();
 
-    qDebug() << "event->text:" << event->text();
-    qDebug() << "event->key: " << event->key();
+    //qDebug() << "event->text:" << event->text();
+    //qDebug() << "event->key: " << event->key();
 
     QChar pressedChar = event->text().at(0);//считаем нажатую клавишу
     QChar charInBrowser = browser->toPlainText()[cursor.position()];
 
     if(pressedChar == charInBrowser)
-        return new TrueCharHandler(browser->currentCharFormat());
+        return QSharedPointer<TrueCharHandler>::create(browser->currentCharFormat());
     else if(pressedChar == '\x8')
     {
         if(cursor.position())
-            return new DeleteKeyHandler(browser->currentCharFormat(), (browser->toPlainText())[cursor.position() - 1], browser);
+            return QSharedPointer<DeleteKeyHandler>::create(browser->currentCharFormat(), (browser->toPlainText())[cursor.position() - 1], browser);
         else
-            return new NullKeyHandler;
+            return QSharedPointer<NullKeyHandler>::create();
     }
     else if(charInBrowser == ' ')
-        return new ExtraCharHadler(browser->currentCharFormat(), pressedChar);
+        return QSharedPointer<ExtraCharHadler>::create(browser->currentCharFormat(), pressedChar);
     else
-        return new WrongCharHandler(browser->currentCharFormat());
+        return QSharedPointer<WrongCharHandler>::create(browser->currentCharFormat());
 }
 
 void AbstractCharHandler::resetVectors()

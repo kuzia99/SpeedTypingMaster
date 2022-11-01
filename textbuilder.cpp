@@ -7,7 +7,6 @@
 #include <QDateTime>
 #include <QDir>
 
-
 TextBuilder::TextBuilder()
 {
 
