@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
     ui->tabWidget->tabBar()->hide();
+    connect(&timer, SIGNAL(timeout()), this, SLOT(secTimerEvent()));
     updateText();
 }
 
@@ -40,46 +41,40 @@ void MainWindow::on_pushButtonWebsite_clicked()
     QDesktopServices::openUrl(QUrl(link));
 }
 
-
-void MainWindow::on_toolButtonTime_clicked()
-{
-
-}
-
 void MainWindow::addTimer()
 {
-    if(!timer && (browserCursor.position() == 1))
+    if(!timer.isActive() && (browserCursor.position() == 1))
     {
         stat->setInputTime(ui->labelTimerCounter->text().toInt());
         qDebug() << "start Timer";
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
-        timer->start(1000);
+        timer.start(1000);
     }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if((event->modifiers() & Qt::ControlModifier) && (event->key() == Qt::Key_R))
-    {
-        qDebug() << "control + R pressed";
-        updateText();
-        return;
-    }
-
+    shortcutCheck(event);
     auto handler = AbstractCharHandler::createHandler(event, browserCursor, ui->textBrowser);
     handler->handle((ui->textBrowser->toPlainText())[browserCursor.position()], browserCursor);
     addTimer();
     stat->keyPressed(handler->pressedKeyFlag);// вызываем метод для учета статистики
 }
 
+void MainWindow::shortcutCheck(QKeyEvent *event)
+{
+    if((event->modifiers() & Qt::ControlModifier) && (event->key() == Qt::Key_R))
+    {
+        qDebug() << "control + R pressed";
+        updateText();
+    }
+}
+
 void STMtextBrowser::paintEvent(QPaintEvent *pEvent)
 {
     QTextEdit::paintEvent(pEvent);// use paintEvent() of base class to do the main work
-    // draw cursor (if widget has focus)
-      const QRect qRect = cursorRect(textCursor());
-      QPainter qPainter(viewport());
-      qPainter.fillRect(qRect, textColor());
+    const QRect qRect = cursorRect(textCursor());
+    QPainter qPainter(viewport());
+    qPainter.fillRect(qRect, textColor());
 }
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
@@ -123,80 +118,64 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
     }
 }
 
-void MainWindow::timerEvent()
+void MainWindow::secTimerEvent()
 {
-    //qDebug() << "timer Event";
-
-    QString curr = ui->labelTimerCounter->text();
-    int val = curr.toInt() - 1;
-    QString a = QString::number(val);
-    ui->labelTimerCounter->setText(a);
-    if(!val)
+    int counterValue = QString(ui->labelTimerCounter->text()).toInt();
+    counterValue--;
+    ui->labelTimerCounter->setText(QString::number(counterValue));
+    if(!counterValue)
     {
-        //qDebug() << "timer stop";
-        timer->stop();
-        delete timer;
-        timer = nullptr;
-
-        ui->labelWordsPerMinutes->setText(QString::number(stat->getWordsPerMinutes()));
-        ui->labelAccuracy->setText(QString::number(stat->getAccuracyPercent()) + "%");
-        ui->labelCorrectChar->setText(QString::number(stat->getTrueCharCount()));
-        ui->labelWrongChar->setText(QString::number(stat->getWrongCharCount()));
-        ui->labeExtraChar->setText(QString::number(stat->getExtraCharCount()));
-
-
-        ui->tabWidget->setCurrentIndex(1);//открываем новую форму с результатами
+        timer.stop();
+        openStatDisplay();
     }
 }
-
 
 
 void MainWindow::on_pushButton_4_clicked()
 {
     updateText();//рестарт
-    ui->tabWidget->setCurrentIndex(0);//откроем страницу с текстом
 }
 
 void MainWindow::updateText()
 {
-    stat->resetStat();
-    AbstractCharHandler::resetVectors();
-
-    QString counterTime = ui->comboBox_2->currentText();
-    counterTime.chop(2);
-    ui->labelTimerCounter->setText(counterTime);
-
-    QTextCharFormat format(ui->textBrowser->currentCharFormat());
-    format.setForeground(QBrush(QColor("grey")));
-
-    ui->textBrowser->setCurrentCharFormat(format);
-    ui->textBrowser->setText(TextBuilder::generateText(ui->comboBox->currentText()));
-    browserCursor = ui->textBrowser->textCursor();// выставим курсор
-
-    ui->tabWidget->setCurrentIndex(0);//открываем форму ввода текста
-
-    //qDebug() << "timer stop";
-    if(timer)
-    {
-        timer->stop();
-        delete timer;
-        timer = nullptr;
-    }
+    stat->resetStat();  //<! сбросим статистику
+    ui->labelTimerCounter->setText(QString(ui->comboBox_2->currentText()).remove(QRegularExpression(" s"))); //<! выставим новое значение таймера отсчета
+    printNewText();     //<! напечатать новый текст
+    ui->tabWidget->setCurrentIndex(0);  //<!открываем форму ввода текста
+    timer.stop();   //<! остановить таймер
 }
 
 
 void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1)
 {
-    QString counterTime = ui->comboBox_2->currentText();
-    counterTime.chop(2);
-    ui->labelTimerCounter->setText(counterTime);
     updateText();
-    (void)arg1;
+    (void) arg1;
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
     updateText();
+}
+
+
+void MainWindow::openStatDisplay()
+{
+    ui->labelWordsPerMinutes->setText(QString::number(stat->getWordsPerMinutes())); //<! WPM
+    ui->labelAccuracy->setText(QString::number(stat->getAccuracyPercent()) + "%");  //<! ACC
+    ui->labelCorrectChar->setText(QString::number(stat->getTrueCharCount()));       //<! true char
+    ui->labelWrongChar->setText(QString::number(stat->getWrongCharCount()));        //<! wrong char
+    ui->labeExtraChar->setText(QString::number(stat->getExtraCharCount()));         //<! extra char
+
+    ui->tabWidget->setCurrentIndex(1);  //<! открываем форму с результатами
+}
+
+void MainWindow::printNewText()
+{
+    QTextCharFormat format(ui->textBrowser->currentCharFormat());// считали формат текста в поле
+    format.setForeground(QBrush(QColor("grey")));   // выставили серый цвет
+    ui->textBrowser->setCurrentCharFormat(format); //выставим формат текста в главном поле
+    ui->textBrowser->setText(TextBuilder::generateText(ui->comboBox->currentText())); // генерим новый текст и передаем его в поле
+    browserCursor = ui->textBrowser->textCursor();// выставим курсор
 }
 

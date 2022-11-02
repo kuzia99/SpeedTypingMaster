@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QTextBrowser>
+#include <QTimer>
 
 
 QT_BEGIN_NAMESPACE
@@ -19,40 +20,34 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QTimer *timer = nullptr;
-
 private slots:
-    void on_pushButtonSourceCode_clicked();
+    void on_pushButtonSourceCode_clicked();     //<! открыть страницу git
+    void on_pushButtonWebsite_clicked();        //<! открыть страницу приложения
+    void on_pushButton_2_clicked();             //<! закрыть приложение
+    void on_pushButton_3_clicked();             //<! свернуть приложение
+    void on_comboBox_currentTextChanged(const QString &arg1);   //<! виджет изменения языка ввода
+    void on_comboBox_2_currentTextChanged(const QString &arg1); //<! выбор времени отсчета
+    void on_pushButton_4_clicked();                     //<! клавиша возврата к окну ввода текста
+    void on_pushButton_clicked();                       //<! виджет обновить текст
+    void mousePressEvent(QMouseEvent* event) override;  //<! передача нажатий мышью
+    void resizeEvent(QResizeEvent* event) override;     //<! изменение размера окна
+    void mouseMoveEvent(QMouseEvent* event) override;   //<! перемещение окна
 
-    void on_pushButtonWebsite_clicked();
+    void keyPressEvent(QKeyEvent *e) override;   //<! обработчик нажатия клавиш клавиатуры
 
-    void on_toolButtonTime_clicked();
-
-    void keyPressEvent(QKeyEvent *e);
-
-    void on_comboBox_currentTextChanged(const QString &arg1);
-
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
-
-    virtual void mousePressEvent(QMouseEvent* event);
-    virtual void resizeEvent(QResizeEvent* event);
-    virtual void mouseMoveEvent(QMouseEvent* event);
-
-    void timerEvent();
-
-    void on_pushButton_4_clicked();
-    void updateText();
-
-    void on_comboBox_2_currentTextChanged(const QString &arg1);
-
-    void on_pushButton_clicked();
+    void secTimerEvent();
 
 private:
     Ui::MainWindow *ui;
     QPointF m_mousePoint;
+    QTimer timer;
+
     void addTimer();
+    void updateText();      //<! обновить окно ввода
+    void printNewText();    //<! напечатать новый текст
+    void openStatDisplay(); //<! отобразить статистику ввода
+    void shortcutCheck(QKeyEvent *event);   //<! обработка сочетаний клавиш
+
 };
 
 class STMtextBrowser : public QTextBrowser

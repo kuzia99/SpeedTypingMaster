@@ -167,6 +167,8 @@ void inputStatistic::resetStat()
     extraChar = 0;
     wrongPressed = 0;
     extraPressed = 0;
+
+    AbstractCharHandler::resetVectors();
 }
 
 void inputStatistic::setInputTime(int t)
