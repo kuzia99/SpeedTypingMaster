@@ -11,13 +11,11 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    resultwindow.cpp \
     textbuilder.cpp \
     texthandler.cpp
 
 HEADERS += \
     mainwindow.h \
-    resultwindow.h \
     textbuilder.h \
     texthandler.h
 
